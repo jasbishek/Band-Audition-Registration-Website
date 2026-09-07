@@ -3,7 +3,7 @@ services:
     name: band-unknown-backend
     env: node
     plan: free
-    buildCommand: npm install
+    buildCommand: npm install --include=dev && npm run build
     startCommand: node server/index.js
     envVars:
       - key: NODE_ENV

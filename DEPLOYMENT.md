@@ -33,7 +33,7 @@ git push origin main
    - **Branch:** `main`
    - **Root Directory:** *(leave blank)*
    - **Runtime:** `Node`
-   - **Build Command:** `npm install`
+   - **Build Command:** `npm install --include=dev && npm run build` (or simply `npm install` for backend-only)
    - **Start Command:** `node server/index.js`
    - **Instance Type:** `Free`
 5. Under **Environment Variables**, add:
