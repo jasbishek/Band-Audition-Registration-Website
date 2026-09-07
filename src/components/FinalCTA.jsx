@@ -12,7 +12,9 @@ export default function FinalCTA({ onJoinClick }) {
           margin: '0 auto',
           borderColor: 'var(--spider-red)',
           boxShadow: '0 0 60px rgba(255, 13, 53, 0.4), 0 0 30px rgba(0, 212, 255, 0.25)',
-          background: 'radial-gradient(circle at 50% 50%, rgba(255, 13, 53, 0.18) 0%, rgba(3, 5, 9, 0.98) 85%)'
+          background: 'radial-gradient(circle at 50% 50%, rgba(255, 13, 53, 0.18) 0%, rgba(3, 5, 9, 0.98) 85%)',
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
         <div className="spider-web-corner-tl" />
@@ -20,7 +22,7 @@ export default function FinalCTA({ onJoinClick }) {
 
         <div className="final-cta-grid">
           
-          <div style={{ textAlign: 'left' }}>
+          <div className="final-cta-text-content">
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#00d4ff', marginBottom: '16px' }}>
               <SpiderIcon size={20} color="#00d4ff" />
               <span style={{ fontSize: 'clamp(0.75rem, 1.8vw, 0.85rem)', fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase' }}>
@@ -42,7 +44,7 @@ export default function FinalCTA({ onJoinClick }) {
 
             <h3 
               style={{ 
-                fontSize: 'clamp(1.2rem, 3vw, 2.4rem)', 
+                fontSize: 'clamp(1.15rem, 3vw, 2.4rem)', 
                 fontWeight: 800, 
                 color: 'var(--spider-red)',
                 textShadow: '0 0 25px rgba(255, 13, 53, 0.7)',
