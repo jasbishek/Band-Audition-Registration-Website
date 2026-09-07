@@ -30,12 +30,7 @@ export default function Hero({ onRegisterClick }) {
 
         <div className="hero-grid">
           
-          {/* Left / Spider-Man Artwork Column (Order 2 on desktop, Order 1 on mobile) */}
-          <div className="hero-spiderman-column">
-            <RealisticSpidermanHero width={380} height={480} />
-          </div>
-
-          {/* Right / Content Column (Order 1 on desktop, Order 2 on mobile) */}
+          {/* Left Column: All Text, Headings, Description, Button, Tagline */}
           <div className="hero-text-content">
             
             {/* Equalizer Visualizer Header Badge */}
@@ -82,6 +77,11 @@ export default function Hero({ onRegisterClick }) {
               <Sparkles size={14} color="#00d4ff" />
               SING • PLAY • PERFORM • INSPIRE
             </p>
+          </div>
+
+          {/* Right Column: Spider-Man Artwork */}
+          <div className="hero-spiderman-column">
+            <RealisticSpidermanHero width={380} height={480} />
           </div>
 
         </div>

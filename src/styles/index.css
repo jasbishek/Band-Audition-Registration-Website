@@ -758,7 +758,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: wrap;
 }
 
-/* Tablet & Mobile (<= 868px): Two-Column Layout with Spider-Man on LEFT and Content on RIGHT */
+/* Tablet & Mobile (<= 868px): Two-Column Layout with Content on LEFT and Spider-Man on RIGHT */
 @media (max-width: 868px) {
   .hero-glass-card {
     padding: clamp(16px, 3.5vw, 28px) clamp(12px, 3vw, 20px);
@@ -766,14 +766,23 @@ h1, h2, h3, h4, h5, h6 {
 
   .hero-grid {
     display: grid;
-    grid-template-columns: clamp(100px, 32vw, 175px) 1fr;
+    grid-template-columns: 1fr clamp(95px, 32vw, 160px);
     gap: clamp(10px, 2.5vw, 20px);
     align-items: center;
   }
 
-  /* Spider-Man Column on LEFT */
-  .hero-spiderman-column {
+  /* Text & Action Button Content Column on LEFT */
+  .hero-text-content {
     order: 1;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+  }
+
+  /* Spider-Man Column on RIGHT */
+  .hero-spiderman-column {
+    order: 2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -797,15 +806,6 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(255, 13, 53, 0.5)) drop-shadow(0 0 8px rgba(0, 212, 255, 0.35));
     transform: none;
-  }
-
-  /* Text & Action Button Content Column on RIGHT */
-  .hero-text-content {
-    order: 2;
-    text-align: left;
-    position: relative;
-    z-index: 2;
-    min-width: 0;
   }
 
   .hero-badge {
@@ -872,7 +872,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Small screens adjustments (<= 380px) */
 @media (max-width: 380px) {
   .hero-grid {
-    grid-template-columns: 88px 1fr;
+    grid-template-columns: 1fr 88px;
     gap: 8px;
   }
 
