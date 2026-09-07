@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="spiderRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff1e42" />
+      <stop offset="100%" stop-color="#99001c" />
+    </linearGradient>
+    <linearGradient id="neonBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="100%" stop-color="#0055ff" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="46" fill="#0b0e14" stroke="url(#spiderRed)" stroke-width="4"/>
+  <!-- Spider Web Lines -->
+  <path d="M50 4 L50 96 M4 50 L96 50 M17 17 L83 83 M17 83 L83 17" stroke="rgba(255, 30, 66, 0.25)" stroke-width="1.5"/>
+  <!-- Musical Guitar/Note Icon -->
+  <path d="M40 68 C 36 68, 32 64, 32 58 C 32 52, 36 48, 42 48 C 45 48, 48 50, 48 53 L48 24 L68 18 L68 46 C 64 46, 60 42, 60 36 L60 26 L52 29 L52 58 C 48 58, 44 68, 40 68 Z" fill="url(#spiderRed)"/>
+  <circle cx="40" cy="58" r="6" fill="url(#neonBlue)"/>
+</svg>

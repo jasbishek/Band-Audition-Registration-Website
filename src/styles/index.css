@@ -1,0 +1,627 @@
+/* ==========================================================================
+   BAND UNKNOWN - SPIDER-MAN × MUSIC CINEMATIC AUDITION THEME (MAJOR VISUAL OVERHAUL)
+   ========================================================================== */
+
+:root {
+  --bg-dark: #030509;
+  --bg-card: rgba(8, 12, 22, 0.85);
+  --bg-card-hover: rgba(14, 20, 36, 0.92);
+  --spider-red: #ff0d35;
+  --spider-red-hover: #ff294e;
+  --spider-red-glow: rgba(255, 13, 53, 0.5);
+  --spider-red-dark: #8b0015;
+  --spider-blue: #00d4ff;
+  --spider-blue-glow: rgba(0, 212, 255, 0.45);
+  --deep-blue: #0055ff;
+  --text-white: #ffffff;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-red: rgba(255, 13, 53, 0.4);
+  --border-blue: rgba(0, 212, 255, 0.4);
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  background: #030509;
+  color: var(--text-white);
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar - Spider Web Slinger Theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #030509;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--spider-red), var(--spider-blue));
+  border-radius: 5px;
+  border: 2px solid #030509;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--spider-red);
+  box-shadow: 0 0 10px var(--spider-red);
+}
+
+/* Typography Utilities */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.text-gradient-hero {
+  background: linear-gradient(135deg, #ffffff 10%, #ff0d35 55%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(255, 13, 53, 0.5));
+}
+
+.text-glow-red {
+  text-shadow: 0 0 20px rgba(255, 13, 53, 0.8), 0 0 40px rgba(255, 13, 53, 0.4);
+}
+
+.text-glow-blue {
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+}
+
+/* Metallic Light Sweep Text Animation */
+@keyframes lightSweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.superhero-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: linear-gradient(90deg, #ffffff 0%, #ff0d35 30%, #ffffff 50%, #00d4ff 70%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: lightSweep 4s infinite linear;
+  text-shadow: 0 5px 20px rgba(255, 13, 53, 0.4);
+}
+
+/* Glassmorphism Command Panel */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-red);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255, 13, 53, 0.1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card-hover:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--spider-blue);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 45px rgba(255, 13, 53, 0.35), 0 0 30px rgba(0, 212, 255, 0.25);
+}
+
+/* Spider Web Corner Graphics */
+.spider-web-corner-tl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 90px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.5;
+  background: radial-gradient(circle at 0 0, transparent 20px, rgba(255, 13, 53, 0.3) 21px, transparent 22px);
+  border-top: 2px solid var(--spider-red);
+  border-left: 2px solid var(--spider-red);
+}
+
+.spider-web-corner-tr {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 90px;
+  height: 90px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.5;
+  border-top: 2px solid var(--spider-blue);
+  border-right: 2px solid var(--spider-blue);
+}
+
+/* Superhero Action Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, #ff0d35 0%, #a30018 100%);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 25px rgba(255, 13, 53, 0.5), 0 0 15px rgba(255, 13, 53, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ff294e 0%, #c4001d 100%);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 35px rgba(255, 13, 53, 0.8), 0 0 25px rgba(0, 212, 255, 0.5);
+  border-color: var(--spider-blue);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(0, 212, 255, 0.12);
+  color: var(--spider-blue);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border-blue);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 212, 255, 0.25);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  border-color: #ffffff;
+}
+
+/* Top Branding Unified Stack - Equal Spacing System */
+.branding-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.2vw, 24px);
+  padding: 32px 24px 16px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 100;
+}
+
+.branding-stack > * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.kit-college-logo {
+  display: block;
+  width: auto;
+  max-width: 680px;
+  height: auto;
+  margin: 0 auto;
+  background: transparent;
+  object-fit: contain;
+  border: none;
+  box-shadow: none;
+  filter: none;
+  opacity: 1;
+}
+
+.band-logo {
+  display: block;
+  width: 90%;
+  max-width: 340px;
+  height: auto;
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  filter: none;
+  mix-blend-mode: screen;
+  opacity: 1;
+  object-fit: contain;
+}
+
+/* Section Container */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 90px 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 56px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Equalizer Web Wave Component */
+.equalizer-bar-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 28px;
+}
+
+.equalizer-bar {
+  width: 4px;
+  background: linear-gradient(0deg, var(--spider-red), var(--spider-blue));
+  border-radius: 2px;
+  animation: equalizerBounce 1.2s infinite ease-in-out alternate;
+  box-shadow: 0 0 8px rgba(255, 13, 53, 0.6);
+}
+
+.equalizer-bar:nth-child(1) { animation-delay: 0.1s; height: 35%; }
+.equalizer-bar:nth-child(2) { animation-delay: 0.3s; height: 85%; }
+.equalizer-bar:nth-child(3) { animation-delay: 0.2s; height: 55%; }
+.equalizer-bar:nth-child(4) { animation-delay: 0.4s; height: 100%; }
+.equalizer-bar:nth-child(5) { animation-delay: 0.15s; height: 70%; }
+.equalizer-bar:nth-child(6) { animation-delay: 0.35s; height: 95%; }
+.equalizer-bar:nth-child(7) { animation-delay: 0.25s; height: 45%; }
+
+@keyframes equalizerBounce {
+  0% { height: 15%; }
+  50% { height: 100%; }
+  100% { height: 25%; }
+}
+
+/* Pulsing Spider Logo Glow Halo */
+@keyframes haloPulse {
+  0% {
+    box-shadow: 0 0 30px rgba(255, 13, 53, 0.4), 0 0 60px rgba(0, 212, 255, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(255, 13, 53, 0.8), 0 0 100px rgba(0, 212, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(255, 13, 53, 0.4), 0 0 60px rgba(0, 212, 255, 0.25);
+  }
+}
+
+.logo-glow-wrapper {
+  animation: haloPulse 3s infinite ease-in-out;
+  border-radius: 50%;
+  padding: 16px;
+  display: inline-block;
+  background: rgba(255, 13, 53, 0.08);
+  border: 2px solid rgba(255, 13, 53, 0.4);
+}
+
+/* Command Panel Form Inputs */
+.form-group {
+  margin-bottom: 26px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--spider-blue);
+  margin-bottom: 8px;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(6, 9, 16, 0.95);
+  border: 1px solid rgba(255, 13, 53, 0.35);
+  border-radius: var(--radius-md);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: all 0.25s ease;
+  outline: none;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--spider-red);
+  box-shadow: 0 0 20px rgba(255, 13, 53, 0.5), 0 0 10px rgba(0, 212, 255, 0.3);
+  background: rgba(10, 15, 26, 0.98);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-select option {
+  background: #080c16;
+  color: #ffffff;
+}
+
+/* Checkbox Style */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--spider-red);
+  cursor: pointer;
+}
+
+/* Photo Slideshow Spider Frame */
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid var(--spider-red);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 13, 53, 0.3);
+  background: #030509;
+}
+
+.slideshow-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-out;
+  transform: scale(1.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #030509;
+}
+
+.slideshow-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slideshow-img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  object-position: center;
+}
+
+.slideshow-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(3, 5, 9, 0.8) 0%, rgba(3, 5, 9, 0.15) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.slideshow-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(3, 5, 9, 0.75);
+  border: 1px solid var(--border-red);
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.slideshow-nav-btn:hover {
+  background: var(--spider-red);
+  border-color: var(--spider-blue);
+  box-shadow: 0 0 20px var(--spider-red);
+}
+
+.slideshow-nav-btn.prev { left: 16px; }
+.slideshow-nav-btn.next { right: 16px; }
+
+/* Admin Dashboard Table */
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--text-white);
+}
+
+.admin-table th {
+  background: rgba(14, 20, 36, 0.95);
+  color: var(--spider-blue);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--border-red);
+}
+
+.admin-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(8, 12, 22, 0.6);
+  font-size: 0.95rem;
+}
+
+.admin-table tr:hover td {
+  background: rgba(255, 13, 53, 0.12);
+}
+
+.badge-category {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-singing {
+  background: rgba(255, 13, 53, 0.25);
+  color: #ff4d6d;
+  border: 1px solid rgba(255, 13, 53, 0.5);
+}
+
+.badge-instruments {
+  background: rgba(0, 212, 255, 0.25);
+  color: #38bdf8;
+  border: 1px solid rgba(0, 212, 255, 0.5);
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 4, 8, 0.88);
+  backdrop-filter: blur(16px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive Grid Helpers */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .form-row-2 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 868px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Spider-Man Hanging from Card Border */
+.spiderman-hanging-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  position: relative;
+  margin-top: -64px;
+}
+
+.spiderman-hanging-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 868px) {
+  .spiderman-hanging-container {
+    margin-top: 24px;
+    align-self: center;
+  }
+  .spiderman-hanging-img {
+    max-height: 300px;
+  }
+
+  .hero-spiderman-wrapper {
+    margin-right: 0 !important;
+    justify-content: center !important;
+  }
+}
+
+

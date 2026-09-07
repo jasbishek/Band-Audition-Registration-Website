@@ -1,0 +1,108 @@
+import React, { useEffect } from 'react';
+import confetti from 'canvas-confetti';
+import { Music, ArrowLeft, Zap } from 'lucide-react';
+import { SpiderIcon } from './SuperheroSilhouettes';
+
+export default function SuccessModal({ student, onClose }) {
+  useEffect(() => {
+    try {
+      confetti({
+        particleCount: 150,
+        spread: 90,
+        origin: { y: 0.55 },
+        colors: ['#ff0d35', '#00d4ff', '#ffffff', '#0055ff']
+      });
+    } catch (e) {
+      console.log('Confetti effect triggered');
+    }
+  }, []);
+
+  if (!student) return null;
+
+  return (
+    <div className="modal-backdrop">
+      <div 
+        className="glass-card" 
+        style={{ 
+          maxWidth: '580px', 
+          width: '100%', 
+          padding: '44px 36px', 
+          textAlign: 'center',
+          borderColor: 'var(--spider-blue)',
+          boxShadow: '0 0 60px rgba(0, 212, 255, 0.5), 0 0 30px rgba(255, 13, 53, 0.4)'
+        }}
+      >
+        <div className="spider-web-corner-tl" />
+        <div className="spider-web-corner-tr" />
+
+        {/* Spider Icon Header */}
+        <div 
+          style={{
+            width: '84px',
+            height: '84px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, rgba(255, 13, 53, 0.25) 100%)',
+            border: '2px solid #00d4ff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 20px',
+            boxShadow: '0 0 30px rgba(0, 212, 255, 0.6)'
+          }}
+        >
+          <Music size={44} color="#00d4ff" />
+        </div>
+
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--spider-red)', marginBottom: '8px' }}>
+          <SpiderIcon size={18} color="#ff0d35" />
+          <span style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '0.25em', textTransform: 'uppercase' }}>
+            REGISTRATION CONFIRMED
+          </span>
+        </div>
+
+        <h2 className="superhero-title" style={{ fontSize: '3rem', margin: '4px 0 12px' }}>
+          YOU'RE IN!
+        </h2>
+
+        <h3 style={{ fontSize: '1.2rem', color: '#ffffff', fontWeight: 800, marginBottom: '16px', letterSpacing: '0.05em' }}>
+          REGISTRATION SUCCESSFUL
+        </h3>
+
+        {student.registration_id && (
+          <div 
+            style={{ 
+              display: 'inline-block',
+              padding: '8px 20px',
+              background: 'rgba(255, 13, 53, 0.2)',
+              border: '1px solid rgba(255, 13, 53, 0.5)',
+              borderRadius: '30px',
+              fontSize: '0.95rem',
+              fontWeight: 800,
+              color: '#ffffff',
+              marginBottom: '20px',
+              letterSpacing: '0.08em'
+            }}
+          >
+            REGISTRATION ID: <span style={{ color: '#00d4ff' }}>{student.registration_id}</span>
+          </div>
+        )}
+
+        <p style={{ fontSize: '1.1rem', color: '#cbd5e1', marginBottom: '12px', fontWeight: 600 }}>
+          Thank you for registering for the <strong style={{ color: '#ff0d35' }}>BAND UNKNOWN</strong> audition.
+        </p>
+
+        <p style={{ fontSize: '1.05rem', color: '#00d4ff', marginBottom: '32px', fontWeight: 700 }}>
+          The stage is waiting for you.
+        </p>
+
+        <button 
+          className="btn-primary"
+          onClick={onClose}
+          style={{ width: '100%', padding: '16px', fontSize: '1.05rem' }}
+        >
+          <ArrowLeft size={20} /> BACK TO HOME
+        </button>
+      </div>
+    </div>
+  );
+}
