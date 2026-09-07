@@ -6,12 +6,13 @@ import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dataDir = path.join(__dirname, '../data');
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
+const defaultDataDir = path.join(__dirname, '../data');
+const dbPath = process.env.DATABASE_PATH || path.join(defaultDataDir, 'auditions.db');
+const dbDir = path.dirname(dbPath);
 
-const dbPath = path.join(dataDir, 'auditions.db');
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
+}
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {

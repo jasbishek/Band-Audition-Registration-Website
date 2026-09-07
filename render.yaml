@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: band-unknown-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_USER_ID
+        value: jas_abishek
+      - key: ADMIN_PASSWORD
+        value: jasri117
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: '*'

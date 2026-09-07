@@ -26,8 +26,41 @@ const JWT_SECRET = process.env.JWT_SECRET || 'band_unknown_superhero_secret_key_
 // In-memory rate limiter for login protection
 const loginAttempts = new Map();
 
-app.use(cors());
+// Configure CORS for production (Vercel client) & local development
+const clientUrl = process.env.CLIENT_URL || process.env.FRONTEND_URL;
+const allowedOrigins = clientUrl ? clientUrl.split(',').map(u => u.trim()) : ['*'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Fallback permissive for deployment previews
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
+
+// Health check endpoint for Render / monitoring
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', service: 'BAND UNKNOWN API', uptime: process.uptime(), timestamp: new Date().toISOString() });
+});
+
+// Root greeting / status
+app.get('/', (req, res, next) => {
+  if (fs.existsSync(distDir)) {
+    return res.sendFile(path.join(distDir, 'index.html'));
+  }
+  res.json({
+    message: 'BAND UNKNOWN Audition API Server is active 🎸🎤',
+    health: '/api/health',
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Serve static images and public files
 const publicDir = path.join(__dirname, '../public');

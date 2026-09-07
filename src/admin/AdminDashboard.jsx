@@ -5,7 +5,7 @@ import {
   RotateCw, ShieldAlert, CheckCircle, AlertCircle 
 } from 'lucide-react';
 import { ViewDetailModal, EditModal, DeleteConfirmModal } from './AdminModals';
-import { apiFetch } from './api';
+import { apiFetch, getApiUrl } from './api';
 
 export default function AdminDashboard({ token, onLogout }) {
   const [data, setData] = useState({
@@ -86,19 +86,23 @@ export default function AdminDashboard({ token, onLogout }) {
   // Export CSV Action
   const handleExportCsv = async () => {
     try {
+      const targetUrl = getApiUrl('/api/admin/export');
       let response;
       try {
-        response = await fetch('/api/admin/export', {
+        response = await fetch(targetUrl, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
       } catch (err) {
-        // Fallback to direct backend URL
-        response = await fetch('http://localhost:5000/api/admin/export', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        if (!targetUrl.startsWith('http')) {
+          response = await fetch('http://localhost:5000/api/admin/export', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+        } else {
+          throw err;
+        }
       }
 
-      if (!response.ok) {
+      if (!response.ok && !targetUrl.startsWith('http')) {
         response = await fetch('http://localhost:5000/api/admin/export', {
           headers: { 'Authorization': `Bearer ${token}` }
         });

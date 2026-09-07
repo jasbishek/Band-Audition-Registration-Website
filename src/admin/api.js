@@ -1,4 +1,14 @@
 // Centralized resilient API fetch helper
+export const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
+export function getApiUrl(endpoint) {
+  if (endpoint.startsWith('http://') || endpoint.startsWith('https://')) {
+    return endpoint;
+  }
+  const formattedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  return API_BASE_URL ? `${API_BASE_URL}${formattedEndpoint}` : formattedEndpoint;
+}
+
 export async function apiFetch(endpoint, options = {}) {
   const finalOptions = {
     ...options,
@@ -8,8 +18,10 @@ export async function apiFetch(endpoint, options = {}) {
     }
   };
 
+  const targetUrl = getApiUrl(endpoint);
+
   try {
-    const res = await fetch(endpoint, finalOptions);
+    const res = await fetch(targetUrl, finalOptions);
     const text = await res.text();
     let data = {};
     if (text) {
@@ -21,10 +33,10 @@ export async function apiFetch(endpoint, options = {}) {
     }
     return { ok: res.ok, status: res.status, data };
   } catch (err) {
-    // Fallback directly to port 5000 if relative request failed
-    if (!endpoint.startsWith('http')) {
+    // Fallback directly to port 5000 if relative request failed in local dev
+    if (!targetUrl.startsWith('http')) {
       try {
-        const directUrl = `http://localhost:5000${endpoint}`;
+        const directUrl = `http://localhost:5000${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
         const res = await fetch(directUrl, finalOptions);
         const text = await res.text();
         let data = {};
@@ -37,9 +49,10 @@ export async function apiFetch(endpoint, options = {}) {
         }
         return { ok: res.ok, status: res.status, data };
       } catch (fallbackErr) {
-        throw new Error('Server connection failed. Please ensure the backend server is running on port 5000.');
+        throw new Error('Server connection failed. Please ensure the backend server is running and accessible.');
       }
     }
     throw err;
   }
 }
+

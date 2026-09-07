@@ -56,17 +56,18 @@ npm run client
 
 ---
 
-## 🔐 Admin Credentials
-
-- **Admin Login URL**: [http://localhost:5173/admin](http://localhost:5173/admin)
-- **User ID**: `jas_abishek`
-- **Password**: `jasri117`
-
----
-
 ## 🌐 URLs
 
 - **Home Page**: `http://localhost:5173/`
 - **Singing Audition**: `http://localhost:5173/register/singing`
 - **Instruments Audition**: `http://localhost:5173/register/instruments`
 - **Admin Dashboard**: `http://localhost:5173/admin`
+
+---
+
+## 🚀 Cloud Deployment (Render & Vercel)
+
+See [`DEPLOYMENT.md`](DEPLOYMENT.md) for full instructions on deploying:
+- **Backend API:** Render Web Service
+- **Frontend Client:** Vercel Static Site (Vite)
+
