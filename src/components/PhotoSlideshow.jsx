@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAssets } from '../context/AssetContext';
-import { ChevronLeft, ChevronRight, Upload, Camera } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { SpiderIcon } from './SuperheroSilhouettes';
 
-export default function PhotoSlideshow({ onOpenUploader }) {
+export default function PhotoSlideshow() {
   const { assets } = useAssets();
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -28,11 +28,11 @@ export default function PhotoSlideshow({ onOpenUploader }) {
   };
 
   return (
-    <section className="section-container" style={{ paddingTop: '40px', paddingBottom: '40px' }}>
+    <section className="section-container" style={{ paddingTop: 'clamp(20px, 3vw, 40px)', paddingBottom: 'clamp(20px, 3vw, 40px)' }}>
       <div style={{ textAlign: 'center', marginBottom: '24px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--spider-red)', marginBottom: '8px' }}>
           <SpiderIcon size={20} color="#ff0d35" />
-          <span style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: 'clamp(0.72rem, 1.8vw, 0.85rem)', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
             STAGE MEMORIES & LIVE PERFORMANCE
           </span>
         </div>
@@ -60,18 +60,18 @@ export default function PhotoSlideshow({ onOpenUploader }) {
         ))}
 
         {/* Left / Right Controls */}
-        <button className="slideshow-nav-btn prev" onClick={handlePrev} title="Previous Photo">
-          <ChevronLeft size={26} />
+        <button className="slideshow-nav-btn prev" onClick={handlePrev} title="Previous Photo" aria-label="Previous Photo">
+          <ChevronLeft size={24} />
         </button>
-        <button className="slideshow-nav-btn next" onClick={handleNext} title="Next Photo">
-          <ChevronRight size={26} />
+        <button className="slideshow-nav-btn next" onClick={handleNext} title="Next Photo" aria-label="Next Photo">
+          <ChevronRight size={24} />
         </button>
 
         {/* Pagination Dots */}
         <div 
           style={{
             position: 'absolute',
-            bottom: '14px',
+            bottom: '12px',
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
@@ -83,8 +83,9 @@ export default function PhotoSlideshow({ onOpenUploader }) {
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
               style={{
-                width: idx === currentIndex ? '28px' : '8px',
+                width: idx === currentIndex ? '24px' : '8px',
                 height: '8px',
                 borderRadius: '4px',
                 background: idx === currentIndex ? '#ff0d35' : 'rgba(255, 255, 255, 0.4)',

@@ -1,5 +1,6 @@
 /* ==========================================================================
-   BAND UNKNOWN - SPIDER-MAN × MUSIC CINEMATIC AUDITION THEME (MAJOR VISUAL OVERHAUL)
+   BAND UNKNOWN - SPIDER-MAN × MUSIC CINEMATIC AUDITION THEME
+   FULLY RESPONSIVE (DESKTOP + TABLET + MOBILE)
    ========================================================================== */
 
 :root {
@@ -26,7 +27,7 @@
   --radius-sm: 8px;
 }
 
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -38,26 +39,41 @@ html {
   background-color: var(--bg-dark);
   color: var(--text-white);
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
   background: #030509;
   color: var(--text-white);
   line-height: 1.6;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* Custom Scrollbar - Spider Web Slinger Theme */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: #030509;
 }
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--spider-red), var(--spider-blue));
-  border-radius: 5px;
-  border: 2px solid #030509;
+  border-radius: 4px;
+  border: 1px solid #030509;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--spider-red);
@@ -69,6 +85,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
   line-height: 1.2;
+  word-break: break-word;
 }
 
 .text-gradient-hero {
@@ -103,6 +120,7 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-text-fill-color: transparent;
   animation: lightSweep 4s infinite linear;
   text-shadow: 0 5px 20px rgba(255, 13, 53, 0.4);
+  word-break: break-word;
 }
 
 /* Glassmorphism Command Panel */
@@ -116,6 +134,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .glass-card-hover:hover {
@@ -153,6 +172,14 @@ h1, h2, h3, h4, h5, h6 {
   border-right: 2px solid var(--spider-blue);
 }
 
+@media (max-width: 640px) {
+  .spider-web-corner-tl, .spider-web-corner-tr {
+    width: 45px;
+    height: 45px;
+    opacity: 0.25;
+  }
+}
+
 /* Superhero Action Buttons */
 .btn-primary {
   display: inline-flex;
@@ -175,6 +202,8 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  touch-action: manipulation;
+  max-width: 100%;
 }
 
 .btn-primary::before {
@@ -200,6 +229,10 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -216,6 +249,9 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
+  touch-action: manipulation;
+  max-width: 100%;
 }
 
 .btn-secondary:hover {
@@ -225,15 +261,20 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #ffffff;
 }
 
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
 /* Top Branding Unified Stack - Equal Spacing System */
 .branding-stack {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(16px, 2.2vw, 24px);
-  padding: 32px 24px 16px;
+  gap: clamp(14px, 2.2vw, 24px);
+  padding: clamp(20px, 3.5vw, 32px) clamp(14px, 3vw, 24px) clamp(10px, 2vw, 16px);
   width: 100%;
+  max-width: 100%;
   text-align: center;
   position: relative;
   z-index: 100;
@@ -246,8 +287,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .kit-college-logo {
   display: block;
-  width: auto;
-  max-width: 680px;
+  width: 100%;
+  max-width: min(680px, 92vw);
   height: auto;
   margin: 0 auto;
   background: transparent;
@@ -261,7 +302,7 @@ h1, h2, h3, h4, h5, h6 {
 .band-logo {
   display: block;
   width: 90%;
-  max-width: 340px;
+  max-width: min(340px, 80vw);
   height: auto;
   margin: 0 auto;
   background: transparent;
@@ -276,29 +317,32 @@ h1, h2, h3, h4, h5, h6 {
 /* Section Container */
 .section-container {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 90px 24px;
+  padding: clamp(40px, 6vw, 90px) clamp(16px, 3.5vw, 24px);
   position: relative;
   z-index: 2;
 }
 
 .section-title {
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
   font-weight: 900;
   text-align: center;
   margin-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  word-break: break-word;
 }
 
 .section-subtitle {
   color: var(--text-muted);
   text-align: center;
-  font-size: 1.1rem;
-  margin-bottom: 56px;
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  margin-bottom: clamp(32px, 4.5vw, 56px);
   max-width: 680px;
   margin-left: auto;
   margin-right: auto;
+  padding: 0 8px;
 }
 
 /* Equalizer Web Wave Component */
@@ -355,12 +399,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Command Panel Form Inputs */
 .form-group {
-  margin-bottom: 26px;
+  margin-bottom: clamp(18px, 2.5vw, 26px);
+  width: 100%;
 }
 
 .form-label {
   display: block;
-  font-size: 0.88rem;
+  font-size: clamp(0.8rem, 1.4vw, 0.88rem);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -370,16 +415,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .form-input, .form-select, .form-textarea {
   width: 100%;
-  padding: 16px 20px;
+  max-width: 100%;
+  padding: clamp(12px, 2vw, 16px) clamp(14px, 2.5vw, 20px);
   background: rgba(6, 9, 16, 0.95);
   border: 1px solid rgba(255, 13, 53, 0.35);
   border-radius: var(--radius-md);
   color: var(--text-white);
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 16px; /* 16px prevents iOS Safari auto-zoom on mobile */
   transition: all 0.25s ease;
   outline: none;
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
 }
 
 .form-input:focus, .form-select:focus, .form-textarea:focus {
@@ -405,8 +452,9 @@ h1, h2, h3, h4, h5, h6 {
   gap: 12px;
   cursor: pointer;
   user-select: none;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
   color: #cbd5e1;
+  line-height: 1.4;
 }
 
 .checkbox-container input[type="checkbox"] {
@@ -414,6 +462,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 22px;
   accent-color: var(--spider-red);
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 /* Photo Slideshow Spider Frame */
@@ -479,6 +528,7 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   z-index: 10;
   transition: all 0.2s ease;
+  touch-action: manipulation;
 }
 
 .slideshow-nav-btn:hover {
@@ -490,9 +540,25 @@ h1, h2, h3, h4, h5, h6 {
 .slideshow-nav-btn.prev { left: 16px; }
 .slideshow-nav-btn.next { right: 16px; }
 
+@media (max-width: 640px) {
+  .slideshow-nav-btn {
+    width: 38px;
+    height: 38px;
+  }
+  .slideshow-nav-btn.prev { left: 8px; }
+  .slideshow-nav-btn.next { right: 8px; }
+}
+
 /* Admin Dashboard Table */
+.admin-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .admin-table {
   width: 100%;
+  min-width: 760px;
   border-collapse: separate;
   border-spacing: 0;
   color: var(--text-white);
@@ -509,6 +575,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 16px;
   text-align: left;
   border-bottom: 2px solid var(--border-red);
+  white-space: nowrap;
 }
 
 .admin-table td {
@@ -530,6 +597,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .badge-singing {
@@ -550,12 +618,14 @@ h1, h2, h3, h4, h5, h6 {
   inset: 0;
   background: rgba(2, 4, 8, 0.88);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: clamp(12px, 3vw, 24px);
   animation: fadeIn 0.25s ease;
+  overflow-y: auto;
 }
 
 @keyframes fadeIn {
@@ -563,13 +633,86 @@ h1, h2, h3, h4, h5, h6 {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Responsive Grid Helpers */
+/* ==========================================================================
+   DEDICATED RESPONSIVE GRID LAYOUTS (CLEAN REFLOW WITHOUT INLINE OVERRIDES)
+   ========================================================================== */
+
+/* 1. Hero Grid Layout */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+}
+
+/* 2. Audition Category Grid */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+}
+
+@media (max-width: 868px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* 3. Venue & Contact Grid */
+.venue-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: stretch;
+}
+
+@media (max-width: 868px) {
+  .venue-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* 4. Final CTA Grid */
+.final-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 270px;
+  gap: 30px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .final-cta-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+}
+
+/* Generic 2-column grid */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 36px;
 }
 
+@media (max-width: 868px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* Form 2-column Row */
 .form-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -580,12 +723,6 @@ h1, h2, h3, h4, h5, h6 {
   .form-row-2 {
     grid-template-columns: 1fr;
     gap: 12px;
-  }
-}
-
-@media (max-width: 868px) {
-  .grid-2 {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -609,19 +746,69 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
-@media (max-width: 868px) {
+@media (max-width: 900px) {
   .spiderman-hanging-container {
-    margin-top: 24px;
+    margin-top: 16px;
     align-self: center;
   }
   .spiderman-hanging-img {
-    max-height: 300px;
+    max-height: 280px;
   }
+}
 
+@media (max-width: 480px) {
+  .spiderman-hanging-img {
+    max-height: 220px;
+  }
+}
+
+/* Hero Spider-Man Artwork Wrapper */
+.hero-spiderman-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-right: -40px;
+}
+
+@media (max-width: 960px) {
   .hero-spiderman-wrapper {
     margin-right: 0 !important;
     justify-content: center !important;
   }
 }
 
+/* Contact Card Row Items */
+.contact-row-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 20px;
+  background: rgba(6, 9, 16, 0.85);
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
 
+@media (max-width: 520px) {
+  .contact-row-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .contact-row-card > div:first-child {
+    justify-content: center;
+  }
+  .contact-row-card .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Responsive card padding helper */
+.card-content-padding {
+  padding: clamp(24px, 5vw, 60px) clamp(16px, 4vw, 40px);
+}

@@ -46,7 +46,7 @@ export default function AdminLogin({ onLoginSuccess }) {
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center', 
-        padding: '24px',
+        padding: 'clamp(16px, 3vw, 24px)',
         background: 'radial-gradient(circle at 50% 30%, #161d30 0%, #06070a 80%)'
       }}
     >
@@ -55,7 +55,7 @@ export default function AdminLogin({ onLoginSuccess }) {
         style={{ 
           maxWidth: '460px', 
           width: '100%', 
-          padding: '40px 32px', 
+          padding: 'clamp(28px, 5vw, 40px) clamp(18px, 4vw, 32px)', 
           borderColor: '#ff1e42',
           boxShadow: '0 0 40px rgba(255, 30, 66, 0.3)'
         }}
@@ -74,28 +74,28 @@ export default function AdminLogin({ onLoginSuccess }) {
         </div>
 
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
           <div 
             style={{
-              width: '64px',
-              height: '64px',
+              width: '58px',
+              height: '58px',
               borderRadius: '50%',
               background: 'rgba(255, 30, 66, 0.15)',
               border: '2px solid #ff1e42',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              margin: '0 auto 16px',
+              margin: '0 auto 14px',
               boxShadow: '0 0 20px rgba(255, 30, 66, 0.4)'
             }}
           >
-            <ShieldCheck size={32} color="#ff1e42" />
+            <ShieldCheck size={30} color="#ff1e42" />
           </div>
 
-          <h2 className="text-gradient-hero" style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '0.06em' }}>
+          <h2 className="text-gradient-hero" style={{ fontSize: 'clamp(1.5rem, 4vw, 1.8rem)', fontWeight: 900, letterSpacing: '0.06em' }}>
             BAND UNKNOWN
           </h2>
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.15em', textTransform: 'uppercase', margin: '4px 0 2px' }}>
+          <h3 style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.15em', textTransform: 'uppercase', margin: '4px 0 2px' }}>
             ADMIN ACCESS
           </h3>
           <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
@@ -105,16 +105,16 @@ export default function AdminLogin({ onLoginSuccess }) {
 
         {errorMsg && (
           <div style={{ padding: '12px 16px', background: 'rgba(255, 30, 66, 0.15)', border: '1px solid #ff1e42', borderRadius: '10px', color: '#ffffff', fontSize: '0.9rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <AlertCircle size={18} color="#ff1e42" />
+            <AlertCircle size={18} color="#ff1e42" style={{ flexShrink: 0 }} />
             <span>{errorMsg}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
           {/* User ID */}
           <div className="form-group">
             <label className="form-label">USER ID</label>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', width: '100%' }}>
               <input 
                 type="text"
                 value={adminId}
@@ -131,7 +131,7 @@ export default function AdminLogin({ onLoginSuccess }) {
           {/* Password */}
           <div className="form-group">
             <label className="form-label">PASSWORD</label>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', width: '100%' }}>
               <input 
                 type={showPassword ? 'text' : 'password'}
                 value={password}
@@ -144,7 +144,7 @@ export default function AdminLogin({ onLoginSuccess }) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+                style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '4px' }}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>

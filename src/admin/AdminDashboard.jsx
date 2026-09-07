@@ -162,7 +162,7 @@ export default function AdminDashboard({ token, onLogout }) {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#06070a', color: '#ffffff', paddingBottom: '60px' }}>
+    <div style={{ minHeight: '100vh', background: '#06070a', color: '#ffffff', paddingBottom: '60px', width: '100%' }}>
       {/* Toast Banner */}
       {toast && (
         <div 
@@ -180,11 +180,12 @@ export default function AdminDashboard({ token, onLogout }) {
             alignItems: 'center',
             gap: '10px',
             fontSize: '0.9rem',
-            fontWeight: 600
+            fontWeight: 600,
+            maxWidth: 'calc(100vw - 40px)'
           }}
         >
           {toast.type === 'error' ? <AlertCircle size={18} /> : <CheckCircle size={18} />}
-          {toast.message}
+          <span>{toast.message}</span>
         </div>
       )}
 
@@ -193,21 +194,23 @@ export default function AdminDashboard({ token, onLogout }) {
         style={{
           background: 'rgba(10, 14, 24, 0.95)',
           borderBottom: '1px solid rgba(255, 30, 66, 0.3)',
-          padding: '16px 32px',
+          padding: '14px clamp(16px, 3vw, 32px)',
           display: 'flex',
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
           position: 'sticky',
           top: 0,
-          zIndex: 100
+          zIndex: 100,
+          flexWrap: 'wrap',
+          gap: '12px'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <h2 className="text-gradient-hero" style={{ fontSize: '1.4rem', fontWeight: 900 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          <h2 className="text-gradient-hero" style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', fontWeight: 900 }}>
             BAND UNKNOWN
           </h2>
           <span style={{ height: '18px', width: '1px', background: 'rgba(255, 255, 255, 0.2)' }} />
-          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.1em' }}>
+          <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.08em' }}>
             AUDITION ADMIN DASHBOARD
           </span>
         </div>
@@ -215,69 +218,69 @@ export default function AdminDashboard({ token, onLogout }) {
         <button 
           onClick={onLogout} 
           className="btn-secondary" 
-          style={{ padding: '8px 16px', fontSize: '0.85rem', borderColor: '#ff1e42', color: '#ff1e42' }}
+          style={{ padding: '8px 16px', fontSize: '0.82rem', borderColor: '#ff1e42', color: '#ff1e42' }}
         >
           <LogOut size={16} /> Logout
         </button>
       </nav>
 
-      <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '32px 24px' }}>
+      <div style={{ maxWidth: '1300px', margin: '0 auto', padding: 'clamp(16px, 3vw, 32px) clamp(12px, 2.5vw, 24px)', width: '100%' }}>
         
         {/* 1. STATISTICS CARDS */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px', marginBottom: '36px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px', marginBottom: '28px' }}>
           
           {/* TOTAL */}
-          <div className="glass-card" style={{ padding: '24px', borderColor: 'rgba(255, 30, 66, 0.3)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase' }}>TOTAL REGISTRATIONS</span>
-              <Users size={22} color="#ff1e42" />
+          <div className="glass-card" style={{ padding: '20px', borderColor: 'rgba(255, 30, 66, 0.3)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase' }}>TOTAL REGISTRATIONS</span>
+              <Users size={20} color="#ff1e42" />
             </div>
-            <h3 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#ffffff' }}>{data.stats.total}</h3>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 900, color: '#ffffff' }}>{data.stats.total}</h3>
           </div>
 
           {/* SINGING */}
-          <div className="glass-card" style={{ padding: '24px', borderColor: 'rgba(255, 30, 66, 0.3)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#ff4d6d', textTransform: 'uppercase' }}>SINGING</span>
-              <Mic size={22} color="#ff4d6d" />
+          <div className="glass-card" style={{ padding: '20px', borderColor: 'rgba(255, 30, 66, 0.3)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#ff4d6d', textTransform: 'uppercase' }}>SINGING</span>
+              <Mic size={20} color="#ff4d6d" />
             </div>
-            <h3 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#ffffff' }}>{data.stats.singing}</h3>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 900, color: '#ffffff' }}>{data.stats.singing}</h3>
           </div>
 
           {/* INSTRUMENTS */}
-          <div className="glass-card" style={{ padding: '24px', borderColor: 'rgba(0, 240, 255, 0.3)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#00f0ff', textTransform: 'uppercase' }}>INSTRUMENTS</span>
-              <Guitar size={22} color="#00f0ff" />
+          <div className="glass-card" style={{ padding: '20px', borderColor: 'rgba(0, 240, 255, 0.3)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00f0ff', textTransform: 'uppercase' }}>INSTRUMENTS</span>
+              <Guitar size={20} color="#00f0ff" />
             </div>
-            <h3 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#ffffff' }}>{data.stats.instruments}</h3>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 900, color: '#ffffff' }}>{data.stats.instruments}</h3>
           </div>
 
           {/* TODAY */}
-          <div className="glass-card" style={{ padding: '24px', borderColor: 'rgba(255, 255, 255, 0.2)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#cbd5e1', textTransform: 'uppercase' }}>TODAY</span>
-              <Calendar size={22} color="#ffffff" />
+          <div className="glass-card" style={{ padding: '20px', borderColor: 'rgba(255, 255, 255, 0.2)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#cbd5e1', textTransform: 'uppercase' }}>TODAY</span>
+              <Calendar size={20} color="#ffffff" />
             </div>
-            <h3 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#ffffff' }}>{data.stats.today}</h3>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 900, color: '#ffffff' }}>{data.stats.today}</h3>
           </div>
 
         </div>
 
         {/* 2. CONTROLS BAR: SEARCH, FILTERS, EXPORT */}
-        <div className="glass-card" style={{ padding: '24px', marginBottom: '28px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '20px' }}>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="glass-card" style={{ padding: 'clamp(16px, 3vw, 24px)', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px', marginBottom: '18px' }}>
+            <h3 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', fontWeight: 800, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Filter size={18} color="#ff1e42" /> AUDITION REGISTRATIONS
             </h3>
 
-            <button className="btn-primary" onClick={handleExportCsv} style={{ padding: '10px 20px', fontSize: '0.85rem' }}>
+            <button className="btn-primary" onClick={handleExportCsv} style={{ padding: '10px 18px', fontSize: '0.82rem' }}>
               <Download size={16} /> EXPORT DATA (CSV)
             </button>
           </div>
 
           {/* Filters Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px' }}>
             {/* Search Input */}
             <div style={{ position: 'relative' }}>
               <input 
@@ -363,14 +366,14 @@ export default function AdminDashboard({ token, onLogout }) {
         </div>
 
         {/* 3. REGISTRATION DATA TABLE */}
-        <div className="glass-card" style={{ overflow: 'hidden' }}>
+        <div className="glass-card" style={{ overflow: 'hidden', width: '100%' }}>
           {loading ? (
-            <div style={{ padding: '60px', textAlign: 'center', color: '#94a3b8' }}>
+            <div style={{ padding: '60px 20px', textAlign: 'center', color: '#94a3b8' }}>
               <RotateCw className="animate-spin" size={32} color="#ff1e42" style={{ margin: '0 auto 16px' }} />
               <p>Loading registrations...</p>
             </div>
           ) : error ? (
-            <div style={{ padding: '40px', textAlign: 'center', color: '#ff1e42' }}>
+            <div style={{ padding: '40px 20px', textAlign: 'center', color: '#ff1e42' }}>
               <ShieldAlert size={36} style={{ margin: '0 auto 12px' }} />
               <p>{error}</p>
               <button className="btn-secondary" onClick={fetchRegistrations} style={{ marginTop: '16px' }}>
@@ -387,7 +390,7 @@ export default function AdminDashboard({ token, onLogout }) {
             </div>
           ) : (
             <>
-              <div style={{ overflowX: 'auto' }}>
+              <div className="admin-table-container">
                 <table className="admin-table">
                   <thead>
                     <tr>
@@ -455,8 +458,8 @@ export default function AdminDashboard({ token, onLogout }) {
               </div>
 
               {/* PAGINATION FOOTER */}
-              <div style={{ padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255, 255, 255, 0.08)', flexWrap: 'wrap', gap: '12px' }}>
-                <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
+              <div style={{ padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255, 255, 255, 0.08)', flexWrap: 'wrap', gap: '12px' }}>
+                <span style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
                   Showing {data.registrations.length > 0 ? (data.pagination.page - 1) * data.pagination.limit + 1 : 0} – {Math.min(data.pagination.page * data.pagination.limit, data.pagination.total)} of {data.pagination.total} registrations
                 </span>
 
@@ -470,7 +473,7 @@ export default function AdminDashboard({ token, onLogout }) {
                     <ChevronLeft size={16} /> Previous
                   </button>
 
-                  <span style={{ fontSize: '0.85rem', padding: '0 8px', color: '#ffffff' }}>
+                  <span style={{ fontSize: '0.82rem', padding: '0 6px', color: '#ffffff' }}>
                     Page {data.pagination.page} of {data.pagination.totalPages}
                   </span>
 
@@ -501,8 +504,8 @@ export default function AdminDashboard({ token, onLogout }) {
       {editingRecord && (
         <EditModal 
           registration={editingRecord} 
-          onClose={() => setEditingRecord(null)}
-          onSave={handleSaveEdit}
+          onClose={() => setEditingRecord(null)} 
+          onSave={handleSaveEdit} 
         />
       )}
 
@@ -510,7 +513,7 @@ export default function AdminDashboard({ token, onLogout }) {
         <DeleteConfirmModal 
           registration={deletingRecord} 
           onClose={() => setDeletingRecord(null)} 
-          onDelete={handleDeleteConfirm}
+          onDelete={handleDeleteConfirm} 
         />
       )}
     </div>

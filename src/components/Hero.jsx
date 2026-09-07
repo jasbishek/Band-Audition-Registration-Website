@@ -8,15 +8,15 @@ export default function Hero({ onRegisterClick }) {
     <section 
       className="section-container" 
       style={{ 
-        paddingTop: '40px', 
-        paddingBottom: '70px',
+        paddingTop: 'clamp(20px, 4vw, 40px)', 
+        paddingBottom: 'clamp(36px, 5vw, 70px)',
         position: 'relative'
       }}
     >
       <div 
         className="glass-card" 
         style={{ 
-          padding: '60px 40px', 
+          padding: 'clamp(24px, 5vw, 60px) clamp(16px, 4vw, 40px)', 
           maxWidth: '1100px', 
           margin: '0 auto', 
           borderColor: 'var(--spider-red)',
@@ -27,18 +27,18 @@ export default function Hero({ onRegisterClick }) {
         <div className="spider-web-corner-tl" />
         <div className="spider-web-corner-tr" />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: '40px', alignItems: 'center' }} className="grid-2">
+        <div className="hero-grid">
           
           {/* Left Side: Hero Text & Action Button */}
           <div style={{ textAlign: 'left' }}>
             
             {/* Equalizer Visualizer Header */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', background: 'rgba(255, 13, 53, 0.12)', border: '1px solid rgba(255, 13, 53, 0.4)', padding: '6px 18px', borderRadius: '30px', marginBottom: '24px' }}>
-              <SpiderIcon size={18} color="#ff0d35" />
-              <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#00d4ff', letterSpacing: '0.18em', textTransform: 'uppercase' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(255, 13, 53, 0.12)', border: '1px solid rgba(255, 13, 53, 0.4)', padding: '6px 16px', borderRadius: '30px', marginBottom: '20px', maxWidth: '100%' }}>
+              <SpiderIcon size={16} color="#ff0d35" />
+              <span style={{ fontSize: 'clamp(0.72rem, 1.8vw, 0.85rem)', fontWeight: 800, color: '#00d4ff', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                 SPIDER-MAN × MUSIC AUDITIONS 2026
               </span>
-              <div className="equalizer-bar-container" style={{ height: '18px' }}>
+              <div className="equalizer-bar-container" style={{ height: '16px' }}>
                 <div className="equalizer-bar" />
                 <div className="equalizer-bar" />
                 <div className="equalizer-bar" />
@@ -48,7 +48,7 @@ export default function Hero({ onRegisterClick }) {
             {/* Main Headings */}
             <h2 
               style={{ 
-                fontSize: 'clamp(2.2rem, 5vw, 3.6rem)', 
+                fontSize: 'clamp(1.8rem, 4.5vw, 3.6rem)', 
                 fontWeight: 900, 
                 letterSpacing: '0.04em',
                 textTransform: 'uppercase',
@@ -62,10 +62,10 @@ export default function Hero({ onRegisterClick }) {
 
             <h3 
               style={{ 
-                fontSize: 'clamp(1.3rem, 3vw, 2rem)', 
+                fontSize: 'clamp(1.1rem, 2.5vw, 2rem)', 
                 fontWeight: 800, 
                 color: 'var(--spider-red)',
-                marginBottom: '20px',
+                marginBottom: '16px',
                 textShadow: '0 0 20px rgba(255, 13, 53, 0.6)'
               }}
             >
@@ -75,37 +75,41 @@ export default function Hero({ onRegisterClick }) {
             {/* Description */}
             <p 
               style={{ 
-                fontSize: '1.1rem', 
+                fontSize: 'clamp(0.95rem, 1.8vw, 1.1rem)', 
                 color: '#cbd5e1', 
-                margin: '0 0 32px',
-                lineHeight: 1.7 
+                margin: '0 0 28px',
+                lineHeight: 1.6 
               }}
             >
               Calling all first-year students with a passion for music. Step into the spotlight, showcase your talent, and become part of our college band.
             </p>
 
             {/* Superhero Action Button */}
-            <div style={{ marginBottom: '28px' }}>
+            <div style={{ marginBottom: '24px' }}>
               <button 
                 className="btn-primary" 
                 onClick={onRegisterClick}
-                style={{ padding: '18px 42px', fontSize: '1.2rem', borderRadius: '50px' }}
+                style={{ 
+                  padding: '16px clamp(24px, 4vw, 42px)', 
+                  fontSize: 'clamp(0.95rem, 2vw, 1.2rem)', 
+                  borderRadius: '50px' 
+                }}
               >
-                <Zap size={22} color="#00d4ff" />
+                <Zap size={20} color="#00d4ff" />
                 REGISTER FOR AUDITION
-                <ArrowDown size={22} />
+                <ArrowDown size={20} />
               </button>
             </div>
 
             {/* Tagline */}
-            <p style={{ fontSize: '0.85rem', fontWeight: 800, color: '#94a3b8', letterSpacing: '0.3em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <p style={{ fontSize: '0.82rem', fontWeight: 800, color: '#94a3b8', letterSpacing: 'clamp(0.12em, 2vw, 0.3em)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <Sparkles size={16} color="#00d4ff" />
               SING • PLAY • PERFORM • INSPIRE
             </p>
           </div>
 
           {/* Right Side: Realistic Spiderman Reference Artwork */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
             <RealisticSpidermanHero width={380} height={480} />
           </div>
 

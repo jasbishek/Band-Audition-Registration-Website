@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mic, Guitar, ShieldAlert, Loader2, Zap, ArrowLeft } from 'lucide-react';
+import { ShieldAlert, Loader2, Zap, ArrowLeft } from 'lucide-react';
 import { SpiderIcon } from './SuperheroSilhouettes';
 import { apiFetch } from '../admin/api';
 
@@ -139,16 +139,16 @@ export default function RegistrationForm({ category, onSuccess, onBackToHome }) 
   };
 
   return (
-    <section id="registration-form-section" className="section-container" style={{ paddingTop: '20px', paddingBottom: '80px' }}>
+    <section id="registration-form-section" className="section-container" style={{ paddingTop: 'clamp(10px, 2vw, 20px)', paddingBottom: 'clamp(40px, 6vw, 80px)' }}>
       
       {/* Top Back Navigation */}
-      <div style={{ maxWidth: '850px', margin: '0 auto 20px' }}>
+      <div style={{ maxWidth: '850px', margin: '0 auto 20px', width: '100%' }}>
         <button 
           onClick={onBackToHome}
           className="btn-secondary"
-          style={{ padding: '10px 20px', fontSize: '0.9rem' }}
+          style={{ padding: '10px 18px', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', width: 'auto' }}
         >
-          <ArrowLeft size={18} /> BACK TO AUDITION CATEGORIES
+          <ArrowLeft size={18} /> BACK TO AUDITIONS
         </button>
       </div>
 
@@ -157,28 +157,29 @@ export default function RegistrationForm({ category, onSuccess, onBackToHome }) 
         style={{ 
           maxWidth: '850px', 
           margin: '0 auto', 
-          padding: '48px 36px',
+          padding: 'clamp(24px, 5vw, 48px) clamp(16px, 4vw, 36px)',
           border: category === 'Singing' ? '2px solid var(--spider-red)' : '2px solid var(--spider-blue)',
           boxShadow: category === 'Singing' ? '0 15px 50px rgba(255, 13, 53, 0.35)' : '0 15px 50px rgba(0, 212, 255, 0.35)',
-          background: 'linear-gradient(180deg, rgba(8, 12, 22, 0.98) 0%, rgba(3, 5, 9, 0.99) 100%)'
+          background: 'linear-gradient(180deg, rgba(8, 12, 22, 0.98) 0%, rgba(3, 5, 9, 0.99) 100%)',
+          width: '100%'
         }}
       >
         <div className="spider-web-corner-tl" />
         <div className="spider-web-corner-tr" />
 
         {/* Form Title Header */}
-        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(255, 13, 53, 0.15)', border: '1px solid rgba(255, 13, 53, 0.4)', padding: '6px 18px', borderRadius: '30px', marginBottom: '12px' }}>
-            <SpiderIcon size={18} color="#ff0d35" />
-            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#00d4ff', letterSpacing: '0.2em', textTransform: 'uppercase' }}>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(255, 13, 53, 0.15)', border: '1px solid rgba(255, 13, 53, 0.4)', padding: '6px 16px', borderRadius: '30px', marginBottom: '12px', maxWidth: '100%' }}>
+            <SpiderIcon size={16} color="#ff0d35" />
+            <span style={{ fontSize: 'clamp(0.7rem, 1.8vw, 0.8rem)', fontWeight: 800, color: '#00d4ff', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
               MISSION: SHOW YOUR TALENT
             </span>
           </div>
 
-          <h3 className="superhero-title" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', margin: '4px 0 8px' }}>
+          <h3 className="superhero-title" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)', margin: '4px 0 8px' }}>
             {category === 'Singing' ? 'SINGING AUDITION REGISTRATION' : 'INSTRUMENT AUDITION REGISTRATION'}
           </h3>
-          <p style={{ color: '#94a3b8', fontSize: '0.95rem' }}>
+          <p style={{ color: '#94a3b8', fontSize: 'clamp(0.85rem, 1.8vw, 0.95rem)' }}>
             SPIDER-WEB COMMAND PANEL — Enter your details to register for BAND UNKNOWN 2026.
           </p>
         </div>
@@ -186,11 +187,11 @@ export default function RegistrationForm({ category, onSuccess, onBackToHome }) 
         {serverError && (
           <div style={{ padding: '14px 18px', background: 'rgba(255, 13, 53, 0.18)', border: '1px solid #ff0d35', borderRadius: '12px', color: '#ffffff', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <ShieldAlert size={20} color="#ff0d35" />
-            <span>{serverError}</span>
+            <span style={{ fontSize: '0.9rem' }}>{serverError}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
           {/* 1. Full Name */}
           <div className="form-group">
             <label className="form-label">Full Name *</label>
@@ -324,7 +325,7 @@ export default function RegistrationForm({ category, onSuccess, onBackToHome }) 
           </div>
 
           {/* 7. Confirmation Checkbox */}
-          <div className="form-group" style={{ marginBottom: '32px' }}>
+          <div className="form-group" style={{ marginBottom: '28px' }}>
             <label className="checkbox-container">
               <input 
                 type="checkbox"
@@ -342,16 +343,16 @@ export default function RegistrationForm({ category, onSuccess, onBackToHome }) 
             type="submit" 
             className="btn-primary" 
             disabled={isSubmitting}
-            style={{ width: '100%', padding: '18px', fontSize: '1.15rem' }}
+            style={{ width: '100%', padding: '16px', fontSize: 'clamp(1rem, 2.5vw, 1.15rem)' }}
           >
             {isSubmitting ? (
               <>
-                <Loader2 size={22} className="animate-spin" />
+                <Loader2 size={20} className="animate-spin" />
                 SUBMITTING...
               </>
             ) : (
               <>
-                <Zap size={22} color="#00d4ff" /> ENTER THE STAGE
+                <Zap size={20} color="#00d4ff" /> ENTER THE STAGE
               </>
             )}
           </button>

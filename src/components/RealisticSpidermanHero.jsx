@@ -8,9 +8,9 @@ export default function RealisticSpidermanHero({ width = 420, height = 520 }) {
         position: 'relative', 
         display: 'flex', 
         alignItems: 'center', 
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         width: '100%',
-        marginRight: '-40px'
+        maxWidth: '100%'
       }}
     >
       <img 
@@ -19,12 +19,12 @@ export default function RealisticSpidermanHero({ width = 420, height = 520 }) {
         className="hero-spiderman-img"
         style={{
           maxWidth: '100%',
+          width: 'auto',
           height: 'auto',
           maxHeight: `${height}px`,
           objectFit: 'contain',
           display: 'block',
           filter: 'drop-shadow(0 0 20px rgba(255, 13, 53, 0.45)) drop-shadow(0 0 10px rgba(0, 212, 255, 0.3))',
-          transform: 'translateX(6px)',
           position: 'relative',
           zIndex: 2
         }} 
@@ -32,5 +32,3 @@ export default function RealisticSpidermanHero({ width = 420, height = 520 }) {
     </div>
   );
 }
-
-
