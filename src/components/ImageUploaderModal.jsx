@@ -63,7 +63,7 @@ export default function ImageUploaderModal({ isOpen, onClose }) {
             className={activeTab === 'slideshow' ? 'btn-primary' : 'btn-secondary'}
             style={{ padding: '8px 16px', fontSize: '0.85rem' }}
           >
-            Slideshow Photos (1-4)
+            Slideshow Photos
           </button>
         </div>
 

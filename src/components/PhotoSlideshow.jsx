@@ -3,29 +3,46 @@ import { useAssets } from '../context/AssetContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { SpiderIcon } from './SuperheroSilhouettes';
 
+const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 export default function PhotoSlideshow() {
   const { assets } = useAssets();
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const slideshowImages = assets.slideshow && assets.slideshow.length > 0 ? assets.slideshow : [];
+  const [displayImages, setDisplayImages] = useState([]);
 
   useEffect(() => {
-    if (slideshowImages.length <= 1) return;
+    if (assets.slideshow && assets.slideshow.length > 0) {
+      setDisplayImages(shuffleArray(assets.slideshow));
+      setCurrentIndex(0);
+    }
+  }, [assets.slideshow]);
+
+  useEffect(() => {
+    if (displayImages.length <= 1) return;
 
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % slideshowImages.length);
+      setCurrentIndex((prev) => (prev + 1) % displayImages.length);
     }, 2500);
 
     return () => clearInterval(timer);
-  }, [slideshowImages.length]);
+  }, [displayImages.length]);
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? slideshowImages.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? displayImages.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % slideshowImages.length);
+    setCurrentIndex((prev) => (prev + 1) % displayImages.length);
   };
+
+  const imagesToRender = displayImages.length > 0 ? displayImages : (assets.slideshow || []);
 
   return (
     <section className="section-container" style={{ paddingTop: 'clamp(20px, 3vw, 40px)', paddingBottom: 'clamp(20px, 3vw, 40px)' }}>
@@ -45,7 +62,7 @@ export default function PhotoSlideshow() {
         <div className="spider-web-corner-tl" />
         <div className="spider-web-corner-tr" />
 
-        {slideshowImages.map((img, idx) => (
+        {imagesToRender.map((img, idx) => (
           <div 
             key={idx} 
             className={`slideshow-slide ${idx === currentIndex ? 'active' : ''}`}
@@ -79,7 +96,7 @@ export default function PhotoSlideshow() {
             zIndex: 10
           }}
         >
-          {slideshowImages.map((_, idx) => (
+          {imagesToRender.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}

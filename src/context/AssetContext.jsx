@@ -29,6 +29,19 @@ const defaultAssets = {
     '/slideshow/slide-7.jpg',
     '/slideshow/slide-8.jpg',
     '/slideshow/slide-9.jpg',
+    '/slideshow/slide-10.jpg',
+    '/slideshow/slide-11.jpg',
+    '/slideshow/slide-12.png',
+    '/slideshow/slide-13.png',
+    '/slideshow/slide-14.png',
+    '/slideshow/slide-15.jpg',
+    '/slideshow/slide-16.jpg',
+    '/slideshow/slide-17.jpg',
+    '/slideshow/slide-18.jpg',
+    '/slideshow/slide-19.jpg',
+    '/slideshow/slide-20.jpg',
+    '/slideshow/slide-21.jpg',
+    '/slideshow/slide-22.jpg',
   ]
 };
 
@@ -38,7 +51,7 @@ export const AssetProvider = ({ children }) => {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (!parsed.slideshow || parsed.slideshow.length !== 9 || parsed.slideshow.some(s => typeof s === 'string' && s.includes('data:image/svg'))) {
+        if (!parsed.slideshow || parsed.slideshow.length !== defaultAssets.slideshow.length || parsed.slideshow.some(s => typeof s === 'string' && s.includes('data:image/svg'))) {
           parsed.slideshow = defaultAssets.slideshow;
         }
         return parsed;
