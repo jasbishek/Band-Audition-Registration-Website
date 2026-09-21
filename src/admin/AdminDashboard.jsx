@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { 
   Users, Mic, Guitar, Calendar, Search, Filter, Download, 
   LogOut, Eye, Edit, Trash2, ChevronLeft, ChevronRight, 
-  RotateCw, ShieldAlert, CheckCircle, AlertCircle 
+  RotateCw, ShieldAlert, CheckCircle, AlertCircle, FileText 
 } from 'lucide-react';
 import { ViewDetailModal, EditModal, DeleteConfirmModal } from './AdminModals';
+import RegistrationCertificate from '../components/RegistrationCertificate';
 import { apiFetch, getApiUrl } from './api';
 
 export default function AdminDashboard({ token, onLogout }) {
@@ -29,6 +30,7 @@ export default function AdminDashboard({ token, onLogout }) {
 
   // Selected Registration for Modals
   const [viewingRecord, setViewingRecord] = useState(null);
+  const [certificateRecord, setCertificateRecord] = useState(null);
   const [editingRecord, setEditingRecord] = useState(null);
   const [deletingRecord, setDeletingRecord] = useState(null);
 
@@ -436,6 +438,13 @@ export default function AdminDashboard({ token, onLogout }) {
                               <Eye size={16} />
                             </button>
                             <button 
+                              title="View / Print Certificate"
+                              onClick={() => setCertificateRecord(reg)}
+                              style={{ padding: '6px', background: 'rgba(255, 30, 66, 0.15)', border: '1px solid rgba(255, 30, 66, 0.4)', color: '#ff1e42', borderRadius: '6px', cursor: 'pointer' }}
+                            >
+                              <FileText size={16} />
+                            </button>
+                            <button 
                               title="Edit Registration"
                               onClick={() => setEditingRecord(reg)}
                               style={{ padding: '6px', background: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.3)', color: '#ffffff', borderRadius: '6px', cursor: 'pointer' }}
@@ -498,6 +507,15 @@ export default function AdminDashboard({ token, onLogout }) {
         <ViewDetailModal 
           registration={viewingRecord} 
           onClose={() => setViewingRecord(null)} 
+          onOpenCertificate={(record) => setCertificateRecord(record)}
+        />
+      )}
+
+      {certificateRecord && (
+        <RegistrationCertificate 
+          student={certificateRecord} 
+          onClose={() => setCertificateRecord(null)} 
+          showBackHome={false}
         />
       )}
 

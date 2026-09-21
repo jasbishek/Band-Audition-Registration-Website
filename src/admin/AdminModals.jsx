@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { X, Save, Trash2, AlertTriangle, CheckCircle } from 'lucide-react';
+import { X, Save, Trash2, AlertTriangle, CheckCircle, FileText } from 'lucide-react';
 
-export function ViewDetailModal({ registration, onClose }) {
+export function ViewDetailModal({ registration, onClose, onOpenCertificate }) {
   if (!registration) return null;
 
   return (
@@ -70,9 +70,20 @@ export function ViewDetailModal({ registration, onClose }) {
           <span style={{ fontSize: '0.78rem', color: '#64748b' }}>
             Registered: {new Date(registration.timestamp).toLocaleString()}
           </span>
-          <button className="btn-secondary" onClick={onClose} style={{ padding: '8px 18px', fontSize: '0.85rem' }}>
-            Close
-          </button>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            {onOpenCertificate && (
+              <button 
+                className="btn-primary" 
+                onClick={() => { onClose(); onOpenCertificate(registration); }}
+                style={{ padding: '8px 16px', fontSize: '0.85rem' }}
+              >
+                <FileText size={16} /> VIEW CERTIFICATE
+              </button>
+            )}
+            <button className="btn-secondary" onClick={onClose} style={{ padding: '8px 18px', fontSize: '0.85rem' }}>
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>

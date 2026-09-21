@@ -42,6 +42,8 @@ const defaultAssets = {
     '/slideshow/slide-20.jpg',
     '/slideshow/slide-21.jpg',
     '/slideshow/slide-22.jpg',
+    '/slideshow/slide-23.jpg',
+    '/slideshow/slide-24.jpg',
   ]
 };
 

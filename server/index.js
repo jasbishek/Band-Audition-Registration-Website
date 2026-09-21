@@ -73,10 +73,10 @@ if (fs.existsSync(distDir)) {
   app.use(express.static(distDir));
 }
 
-// Helper to generate unique registration ID
-function generateRegistrationId() {
-  const randomNum = Math.floor(1000 + Math.random() * 9000);
-  return `BU-2026-${randomNum}`;
+// Helper to format official sequential registration ID (e.g. BU-A2026-01, BU-A2026-10, BU-A2026-100)
+function formatRegistrationId(seqNumber) {
+  const padded = seqNumber < 10 ? `0${seqNumber}` : `${seqNumber}`;
+  return `BU-A2026-${padded}`;
 }
 
 // Authentication Middleware for Protected Admin Routes
@@ -101,8 +101,19 @@ function authenticateAdminToken(req, res, next) {
 // PUBLIC API ENDPOINTS
 // ----------------------------------------------------
 
-// 1. Submit Registration
-app.post('/api/register', (req, res) => {
+// Concurrency Mutex Queue for Registration
+let registrationQueue = Promise.resolve();
+
+function processRegistrationQueue(fn) {
+  return new Promise((resolve, reject) => {
+    registrationQueue = registrationQueue
+      .then(() => fn().then(resolve).catch(reject))
+      .catch(() => fn().then(resolve).catch(reject));
+  });
+}
+
+// 1. Submit Registration with Atomic Sequential ID Generation
+app.post('/api/register', async (req, res) => {
   try {
     const { name, department, dob, phone, category, instrument, experience } = req.body;
 
@@ -116,33 +127,94 @@ app.post('/api/register', (req, res) => {
       return res.status(400).json({ error: 'Please enter a valid WhatsApp / Mobile number.' });
     }
 
-    const regId = generateRegistrationId();
     const now = new Date();
     const timestamp = now.toISOString();
     const created_date = now.toISOString().split('T')[0];
     const finalInstrument = category === 'Singing' ? '—' : (instrument || 'Other');
+    const trimmedName = name.trim();
+    const trimmedDept = department.trim();
+    const trimmedPhone = phone.trim();
+    const trimmedExp = experience.trim();
 
-    const sql = `
-      INSERT INTO registrations (registration_id, name, department, dob, phone, category, instrument, experience, timestamp, created_date)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+    // Process sequentially through Mutex Queue
+    await processRegistrationQueue(() => {
+      return new Promise((resolve) => {
+        db.serialize(() => {
+          db.run('BEGIN IMMEDIATE', (beginErr) => {
+            if (beginErr) {
+              console.error('Transaction start error:', beginErr);
+              res.status(500).json({ error: 'Database transaction error.' });
+              return resolve();
+            }
 
-    db.run(sql, [regId, name.trim(), department.trim(), dob, phone.trim(), category, finalInstrument, experience.trim(), timestamp, created_date], function (err) {
-      if (err) {
-        console.error('Database insert error:', err);
-        return res.status(500).json({ error: 'Failed to submit registration. Please try again.' });
-      }
+            db.get('SELECT next_seq FROM registration_sequence WHERE id = 1', [], (seqErr, seqRow) => {
+              if (seqErr || !seqRow) {
+                console.error('Sequence fetch error:', seqErr);
+                db.run('ROLLBACK');
+                res.status(500).json({ error: 'Failed to generate registration ID sequence.' });
+                return resolve();
+              }
 
-      return res.status(201).json({
-        success: true,
-        message: 'Registration successful!',
-        registration_id: regId,
-        student: {
-          registration_id: regId,
-          name,
-          category,
-          instrument: finalInstrument
-        }
+              const currentSeq = seqRow.next_seq || 1;
+              const regId = formatRegistrationId(currentSeq);
+              const nextSeq = currentSeq + 1;
+
+              db.run('UPDATE registration_sequence SET next_seq = ? WHERE id = 1', [nextSeq], (updateErr) => {
+                if (updateErr) {
+                  console.error('Sequence update error:', updateErr);
+                  db.run('ROLLBACK');
+                  res.status(500).json({ error: 'Failed to update registration sequence.' });
+                  return resolve();
+                }
+
+                const sql = `
+                  INSERT INTO registrations (registration_id, name, department, dob, phone, category, instrument, experience, timestamp, created_date)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                `;
+
+                db.run(sql, [regId, trimmedName, trimmedDept, dob, trimmedPhone, category, finalInstrument, trimmedExp, timestamp, created_date], function (insertErr) {
+                  if (insertErr) {
+                    console.error('Database insert error:', insertErr);
+                    db.run('ROLLBACK');
+                    res.status(500).json({ error: 'Failed to submit registration. Please try again.' });
+                    return resolve();
+                  }
+
+                  const newRowId = this.lastID;
+
+                  db.run('COMMIT', (commitErr) => {
+                    if (commitErr) {
+                      console.error('Transaction commit error:', commitErr);
+                      db.run('ROLLBACK');
+                      res.status(500).json({ error: 'Failed to finalize registration transaction.' });
+                      return resolve();
+                    }
+
+                    res.status(201).json({
+                      success: true,
+                      message: 'Registration successful!',
+                      registration_id: regId,
+                      student: {
+                        id: newRowId,
+                        registration_id: regId,
+                        name: trimmedName,
+                        department: trimmedDept,
+                        dob,
+                        phone: trimmedPhone,
+                        category,
+                        instrument: finalInstrument,
+                        experience: trimmedExp,
+                        timestamp,
+                        created_date
+                      }
+                    });
+                    return resolve();
+                  });
+                });
+              });
+            });
+          });
+        });
       });
     });
   } catch (error) {
