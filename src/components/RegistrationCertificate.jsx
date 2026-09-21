@@ -350,7 +350,7 @@ export default function RegistrationCertificate({ student, onClose, showBackHome
             {/* 5. OFFICIAL CONFIRMATION STATEMENT */}
             <div className="cert-statement-box">
               <p className="cert-statement-text">
-                This is to certify that the above-mentioned student has successfully registered for the <strong>BAND UNKNOWN College Band Auditions 2026</strong>. The student is permitted to attend and participate in the audition as part of the official selection process. The audition is being conducted on 25th September on KIT Auditorium at the time of 3'o Clock, and the registered student has been granted permission to attend the audition for this purpose.
+                This is to certify that the above-mentioned student has successfully registered for the <strong>BAND UNKNOWN College Band Auditions 2026</strong>. The student is permitted to attend and participate in the audition as part of the official selection process. The audition is being conducted on 25th September on KIT Auditorium at the time of 02:30 PM, and the registered student has been granted permission to attend the audition for this purpose.
               </p>
             </div>
 
